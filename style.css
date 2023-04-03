@@ -8,7 +8,20 @@ html, body{
     top: 0;
     width: 100vw;
     height: 100px;
-    background-color: red;
+    /* background-color: red; */
+    background-image: url('https://i.gifer.com/4vMN.gif');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.top-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100px;
+    z-index: 2;
+    background-color: #183da7bf;
 }
 
 .bot {
