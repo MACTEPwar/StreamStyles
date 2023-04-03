@@ -2,6 +2,19 @@ html, body{
     background-color: transparent;
 }
 
+.img {
+    background-image: url('./img.png');
+    width: 100%;
+    height: calc(100vh - 30px);
+    z-index: 4;
+    display: block;
+    position: absolute;
+    top: 47px;
+    left: 0;
+    background-repeat: no-repeat;
+    background-size: 100vw calc(100vh - 128px);
+}
+
 .top {
     position: absolute;
     left: 0;
@@ -30,7 +43,7 @@ html, body{
     bottom: 0;
     width: 100vw;
     height: 100px;
-    background-color: red;
+    background-color: blue;
 }
 
 .left {
