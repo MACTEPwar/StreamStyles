@@ -1,0 +1,39 @@
+html, body{
+    background-color: transparent;
+}
+
+.top {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100px;
+    background-color: red;
+}
+
+.bot {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100px;
+    background-color: red;
+}
+
+.left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    height: 100vh;
+    background-color: red;
+}
+
+.right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100px;
+    height: 100vh;
+    background-color: red;
+}
