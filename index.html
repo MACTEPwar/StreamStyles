@@ -1,18 +1,513 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css"> -->
+    <meta charset="UTF-8">
+
+    <title>
+        На лесные орешки Белочке! {percentage} (^_^)
+    </title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"
+        integrity="sha512-74AKPNm8Tfd5E9c4otg7XNkIVfIe5ynON7wehpX/9Tv5VYcZvXZBAlcgOAjLHg6HeWyLujisAnle6+iKnyWd9Q=="
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+        integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g=="
+        crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        crossorigin="anonymous" />
+    <script src="https://donatello.to/shared/helpers.js"></script>
+
+    <link rel="stylesheet" href="https://donatello.to/widget/widget-goal.css?ver=20230328_112719" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140316543-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-140316543-1');
+    </script>
 </head>
+
 <body>
-    <div class="top"></div>
-    <div class="top-bg"></div>
-    <div class="bot"></div>
-    <div class="img"></div>
-    <!-- <div class="left"></div>
-    <div class="right"></div> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script src="https://donatello.to/shared/Fonts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            let widgetConfig = {"widgetLabel":"На лесные орешки Белочке! ( ^_^ )","widgetName":"На лесные орешки Белочке! {percentage}  (^_^) ","startAmount":0,"donatedAmount":"6105","goalAmount":"9999","fontSize":5,"height":"53","borderWidth":"3","borderRadius":"29","gradientAngle":"196","link":"","textPosition":"inside","outerGradient":true,"keepCounting":true,"keepCountingPercentage":true,"gradient":true,"gradientAnimation":"always","hideMinMaxNumbers":false,"isNinetyDegree":false,"showOnDonationPage":true,"gifSeparatorAbove":true,"gifSeparator":{"name":"ouiyx.gif","gcName":"1677550592615ouiyx.gif","url":"https://storage.googleapis.com/donatelloupload/1677550592615ouiyx.gif","id":"63fd6401f004ac9203dbec5b"},"multiGoalItems":{"items":[{"name":"{amount}","amount":0}],"gradientColor":{"r":"50","g":"50","b":"50","a":"0.5"},"textPosition":"right","padding":0,"gradientStart":50,"borderRadius":0,"borderWidth":0,"borderColor":{"r":"50","g":"50","b":"50","a":"1"}},"multiGoal":false,"color":{"r":"208","g":"31","b":"128","a":"1"},"colorFont":{"r":242,"g":78,"b":98,"a":1},"colorFontNumbers":{"r":0,"g":0,"b":0,"a":1},"colorBorder":{"r":83,"g":88,"b":248,"a":1},"colorText":{"infinitAnimation":false,"isBold":true,"isItalic":false,"isUnderlined":false,"fontFamily":5,"fontSize":"19","letterSpacing":"2","wordSpacing":"5","fontAnimation":"pulse","color":{"r":0,"g":0,"b":0,"a":1},"colorShadow":{"r":94,"g":111,"b":228,"a":1},"colorShadowWidth":"11","gradient":false,"gradientOne":{"r":"206","g":"204","b":"25","a":"1"},"gradientTwo":{"r":"206","g":"204","b":"25","a":"1"},"gradientAngle":90},"widgetStatus":"active","urlName":"na-lesnye-oreshki-belochke","widgetCompletedText":"Вы лучшие!!! Спасибо за поддержку! (^_^)","elementsAnimation":true,"gradientColors":[{"r":0,"g":214,"b":167,"a":1},{"r":23,"g":226,"b":8,"a":1},{"r":240,"g":249,"b":23,"a":0.94}],"youtubeId":"UCKYWRLg66m3sfUQT01LUoGw","youtubeApiKey":"AIzaSyDetvELLsMiCC792nfyFtGJhaDz5PUs4mE","yt":{"client_secret":"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","refresh_token":"1//09rgmpG7p3FUqCgYIARAAGAkSNwF-L9IrOdP7QfPm0yI8jFz1QHT62d_tZkc66bAWXaApiJ6znffl1CjUHhRniAMIT5DWdA7SN_w"}};
+            const userId = '63fd2f7d405291fb15bf5a06';
+            const widgetId = '63fd3407405291fb15c145da';
+
+            let { color, colorFont, colorText, colorFontNumbers, textAnimation } = widgetConfig;
+
+            let prevCopyAmount = '';
+            let createAnimation = false;
+            let socket = null;
+
+            if (widgetConfig.isNinetyDegree) {
+                $('.element').hide();
+                $('.widget-rotated').show();
+            } else {
+                $('.element').show();
+                $('.widget-rotated').hide();
+            }
+
+            createTextDecoration(colorText);
+
+            if (window.location.pathname.indexOf('/preview') !== -1) {
+                window.addEventListener('storage', function (e) {
+                    buildDataWidget();
+                });
+            }
+
+            function updateWidget(data, socketEmit) {
+                // to know if new donate arrived
+                if (!data) return;
+
+                if (prevCopyAmount !== data.donatedAmount && data.gradientAnimation === 'onDonate') {
+                    $('.got').addClass('gradient-animation');
+                } else if (data.gradientAnimation === 'onDonate') {
+                    $('.got').removeClass('gradient-animation');
+                }
+
+                if (prevCopyAmount !== data.donatedAmount && data.textAnimation === 'onDonate') {
+                    $('.text-header').addClass(`animate__animated animate__${colorText.fontAnimation} ${textAnimation}`);
+                } else if (data.textAnimation === 'onDonate') {
+                    $('.text-header').removeClass(`animate__${colorText.fontAnimation} ${data.textAnimation}`);
+                }
+                alert(data.donates.totalAmount)
+                prevCopyAmount = data.donatedAmount;
+
+                if (window.location.pathname.indexOf('/preview') !== -1) {
+                    //preview purpose
+                    buildWidget(data);
+                } else {
+                    !socketEmit && setTimeout(() => {
+                        getWidgetData();
+                    }, 120000);
+                    buildWidget(data);
+                }
+            }
+
+            function initSocket() {
+                socket = helpers.buildSocket();
+
+                if (socket) {
+                    // Listen websocket event as userid
+                    socket.on([widgetId], message => {
+                        // not sure if this is useful since we listening widgetId
+                        if (userId === message.userId && widgetId === message.widgetId) {
+                            updateWidget(message.goalWidgetData, true);
+                        }
+                    });
+                }
+            }
+
+            function getWidgetData() {
+                // const href = window.location.href.replace('/preview', '');
+                // const href = "https://donatello.to/widget/63fd3407405291fb15c145da/token/07c7c0ce54cbe78160cd1a3488350740"
+                const href = "https://donatello.to/api/v1/me"
+                const widgetUrl = `${href}/info`;
+                $.ajax({
+                    url: href,
+                    type: 'GET',
+                    contentType: 'application/json; charset=UTF-8',
+                    headers: {
+                        'X-Token': '07c7c0ce54cbe78160cd1a3488350740'
+                    },
+                    success: (data) => updateWidget(data, false),
+                    error: function (err) {
+                        setTimeout(() => {
+                            getWidgetData();
+                        }, 30000);
+                    }
+                });
+            }
+
+            function buildDataWidget() {
+                widgetConfig = JSON.parse(localStorage.getItem('widgetGoal'));
+
+                if (!widgetConfig.donatedAmount) {
+                    widgetConfig.donatedAmount = widgetConfig.goalAmount/3;
+                }
+
+                color = widgetConfig.color;
+                colorFont = widgetConfig.colorFont;
+                colorText = widgetConfig.colorText;
+                colorFontNumbers = widgetConfig.colorFontNumbers;
+
+                $('.imageDivider').attr('style', '');
+                $('.got').attr('style', '');
+                $('.left').attr('style', '');
+
+                createTextDecoration(colorText);
+                buildWidget(widgetConfig);
+            }
+
+            function createTextDecoration(colorText) {
+                $('.text-header').addClass(`animate__animated animate__${colorText.fontAnimation} ${textAnimation}`);
+                $('.text-header').css({
+                    'textShadow': `rgba(${colorText.colorShadow.r},${colorText.colorShadow.g},${colorText.colorShadow.b},${colorText.colorShadow.a}) 0px 0px ${colorText.colorShadowWidth}px`,
+                });
+            }
+
+            function getGotWidth(data, percentageWidth) {
+                if (widgetConfig.isNinetyDegree) {
+                    return '100%';
+                }
+
+                return data.outerGradient ? `${percentageWidth}%` : '100%';
+            }
+
+            function buildGradient(data, percentageWidth) {
+                let gradientParts = [];
+                let gradientPersentage = {
+                    small: ['0%', '100%'],
+                    big: ['0%', '50%', '100%']
+                };
+                let gradientSize = data.gradientColors.length === 3 ? 'big' : 'small';
+
+                data.gradientColors.map((c, i) => {
+                    gradientParts.push(`rgba(${c.r}, ${c.g}, ${c.b}) ${gradientPersentage[gradientSize][i]}`);
+                });
+
+                $('.got').css({
+                    'background': `linear-gradient(${data.gradientAngle || 90}deg, ${gradientParts.join()})`,
+                });
+
+                if (data.gradientAnimation === 'always') {
+                    $('.got').addClass('gradient-animation');
+                } else if (data.gradientAnimation === 'none') {
+                    $('.got').removeClass('gradient-animation');
+                }
+            }
+
+            function buildWidget(data) {
+                const startAmount = parseInt(data.startAmount, 10) || 0;
+                const goalAmount = parseInt(data.goalAmount, 10) || 1;
+                const height = parseInt(data.height, 10) || 50;
+                let donatedAmount = parseInt(data.donatedAmount, 10) || 0;
+                let text = '';
+                let percentageWidth = 0;
+                let fontSize = colorText.fontSize + 'px' || '6vh';
+                let percentage = (startAmount + donatedAmount) * 100 / goalAmount;
+                percentage = (isNaN(percentage) ? '0' : Math.round(percentage));
+
+                if (widgetConfig.isNinetyDegree) {
+                    $('.element').hide();
+                    $('.widget-rotated').show();
+                } else {
+                    $('.element').show();
+                    $('.widget-rotated').hide();
+                }
+
+                if (!widgetConfig.keepCountingPercentage) {
+                    percentage = percentage >= 100 ? 100 : percentage;
+                }
+
+                if (percentage >= 100) {
+                    percentageWidth = 100;
+                } else {
+                    percentageWidth = percentage;
+                }
+
+                if (percentage >= 100 && widgetConfig.widgetCompletedText) {
+                    text = widgetConfig.widgetCompletedText;
+                } else {
+                    if (widgetConfig.isNinetyDegree) {
+                        text = widgetConfig.widgetName.replace('{percentage}', ' <div>' + percentage + '%</div>');
+                    } else {
+                        text = widgetConfig.widgetName.replace('{percentage}', percentage + '%');
+                    }
+                    text = text.replace('{start}', startAmount + donatedAmount);
+                    text = text.replace('{end}', goalAmount);
+                }
+
+                $('.imageDivider').hide();
+                if (data.gifSeparator) {
+                    $('.imageDivider').attr("src", data.gifSeparator.url);
+                    $('.imageDivider').show();
+
+                    if (data.gifSeparatorAbove) {
+                        $('.imageDivider').css({
+                            zIndex: 9
+                        });
+                    }
+                }
+
+                if (widgetConfig.multiGoal) {
+                    const multiGoal = widgetConfig.multiGoalItems;
+                    const gradient = multiGoal.gradientColor || {b: 50, g: 50, r: 50,a: 0.5};
+                    const borderColor = multiGoal.borderColor || {b: 50, g: 50, r: 50,a: 1};
+                    const gradientStart = multiGoal.gradientStart || 50;
+
+                    $('.multi-goal').css({
+                        position: 'absolute',
+                        height: '100px',
+                        'z-index': '9',
+                        'margin-left': '10px',
+                        'margin-right': '10px',
+                        'display': 'flex',
+                        'align-items': 'stretch',
+                        width: 'calc(100% - 20px)'
+                    });
+
+                    $('.multi-goal').empty();
+                    multiGoal.items.forEach(item => {
+                        $('.multi-goal').append(`
+                            <div class="multi-goal-element textSize changeFont changeFontNumbers" style='width: ${(item.amount * 100 / data.goalAmount).toFixed(2)}%;'>${item.name.replace('{amount}', item.amount)}</div>
+                        `)
+                    })
+
+                    $('.multi-goal-element').css({
+                        display: 'flex',
+                        'align-items': 'center',
+                        background: `linear-gradient(90deg, transparent ${gradientStart}%, rgba(${gradient.r},${gradient.g},${gradient.b},${gradient.a}) 100%)`,
+                        'border-top-right-radius': `${multiGoal.borderRadius || 0}px`,
+                        'border-bottom-right-radius': `${multiGoal.borderRadius || 0}px`,
+                        'border-right': `${multiGoal.borderWidth}px solid rgba(${borderColor.r},${borderColor.g},${borderColor.b},${borderColor.a})`,
+                    });
+
+                    if (multiGoal.textPosition === 'right') {
+                        $('.multi-goal-element').css({
+                            'padding-right': `${multiGoal.padding}px`,
+                            'justify-content': 'flex-end',
+                        });
+                    }
+
+                    if (multiGoal.textPosition === 'left') {
+                        $('.multi-goal-element').css({
+                            'padding-left': `${multiGoal.padding}px`,
+                            'justify-content': 'flex-start',
+                        });
+                    }
+
+                    if (multiGoal.textPosition === 'center') {
+                        $('.multi-goal-element').css({
+                            'padding-left': `${multiGoal.padding}px`,
+                            'justify-content': 'center',
+                        });
+                    }
+                } else {
+                    $('.multi-goal').empty();
+                }
+
+                if (widgetConfig.textPosition === 'above') {
+                    $('.text-header.top').show();
+                    $('.text-header.top').html(text);
+                    $('.text-header.middle').hide();
+                    $('.text-header.bottom').hide();
+                }
+
+                if (widgetConfig.textPosition === 'inside') {
+                    $('.text-header.top').hide();
+                    $('.text-header.middle').show();
+                    $('.text-header.middle').html(text);
+                    $('.text-header.bottom').hide();
+                }
+
+                if (widgetConfig.textPosition === 'below') {
+                    $('.text-header.top').hide();
+                    $('.text-header.middle').hide();
+                    $('.text-header.bottom').show();
+                    $('.text-header.bottom').html(text);
+                }
+
+                if (widgetConfig.textPosition === 'none') {
+                    $('.text-header.top').hide();
+                    $('.text-header.middle').hide();
+                    $('.text-header.bottom').hide();
+                }
+
+                $('.textSize').css({ 'fontSize': fontSize });
+
+                if (widgetConfig.hideMinMaxNumbers) {
+                    $('.start').text(" ");
+                    $('.end').text(" ");
+                } else {
+                    $('.start').text(`${startAmount + donatedAmount}`);
+                    $('.end').text(goalAmount);
+                }
+
+                $('.received').css({
+                    'border-radius': `${data.borderRadius || 0}px`
+                });
+
+                $('.got').css({
+                    'background': `rgba(
+                        ${color.r},
+                        ${color.g},
+                        ${color.b},
+                        ${color.a})`
+                });
+
+                $('.left').css({
+                    'background': `rgba(
+                        ${colorFont.r},
+                        ${colorFont.g},
+                        ${colorFont.b},
+                        ${colorFont.a})`
+                });
+
+                if (!widgetConfig.isNinetyDegree && widgetConfig.elementsAnimation) {
+                    $('.left').animate({
+                        'width': `${100 - percentageWidth}%`,
+                    }, 1500 );
+                } else {
+                    $('.left').css({'width': `${100 - percentageWidth}%`});
+                }
+
+                if (!widgetConfig.isNinetyDegree) {
+                    $('.imageDivider').css({
+                        'height': `${height}px`,
+                    });
+
+                    if (widgetConfig.elementsAnimation) {
+                        $('.imageDivider').animate({
+                            'right': `${100 - percentageWidth}%`,
+                        }, 1500 );
+                    } else {
+                        $('.imageDivider').css({'right': `${100 - percentageWidth}%`});
+                    }
+                }
+
+                if (widgetConfig.isNinetyDegree) {
+                    $('.received-rotated').css({
+                        'border-radius': `${data.borderRadius || 0}px`
+                    });
+
+                    $('.got').css({
+                        'height': `${percentageWidth}%`,
+                    });
+
+                    $('.left').css({
+                        'height': `${100 - percentageWidth}%`,
+                    });
+
+                    $('.text-header.middle').css({
+                        'text-align': 'center'
+                    });
+
+                    $('.received-rotated').css({
+                        'width': `${height}px`,
+                    });
+
+                    $('.text-rotated').css({
+                        'width': `${height - (data.borderWidth * 2)}px`,
+                    });
+
+                    $('.imageDivider').css({
+                        'bottom': `${percentageWidth}%`,
+                        'width': `${height}px`,
+                    });
+                }
+
+                $('.text').css({
+                    'height': `${height}px`,
+                });
+                $('.widget').css({
+                    'height': `${height}px`,
+                });
+
+                $('.changeFont').css({
+                    'fontFamily': FONTS[colorText.fontFamily].id,
+                    'letterSpacing': colorText.letterSpacing + 'px',
+                    'wordSpacing': colorText.wordSpacing + 'px',
+                    'fontWeight': !colorText.isBold ? 100 : 'bold',
+                    'fontStyle': !colorText.isItalic ? 'normal' : 'italic',
+                    'text-decoration': !colorText.isUnderlined ? '' : 'underline',
+                    'textShadow': `${colorText.colorShadow} 0px 0px ${colorText.colorShadowWidth}px`,
+                    'color': `rgba( ${colorText.color.r},
+                        ${colorText.color.g},
+                        ${colorText.color.b},
+                        ${colorText.color.a})`
+                });
+
+                if (colorFontNumbers) {
+                    $('.changeFontNumbers').css({
+                        'color': `rgba( ${colorFontNumbers.r},
+                            ${colorFontNumbers.g},
+                            ${colorFontNumbers.b},
+                            ${colorFontNumbers.a})`
+                    });
+                }
+
+                if (widgetConfig.gradient) {
+                    buildGradient(data, percentageWidth)
+                }
+
+                if (!widgetConfig.isNinetyDegree && widgetConfig.elementsAnimation) {
+                    $('.got').animate({
+                        'width': getGotWidth(data, percentageWidth)
+                    }, 1500 );
+                } else {
+                    $('.got').css({'width': getGotWidth(data, percentageWidth)});
+                }
+
+                const b = data.colorBorder;
+
+                if (b) {
+                    $('.received').css({
+                        border: `${data.borderWidth}px solid rgba(${b.r},${b.g},${b.b},${b.a})`
+                    });
+
+                    $('.received-rotated').css({
+                        border: `${data.borderWidth}px solid rgba(${b.r},${b.g},${b.b},${b.a})`
+                    });
+                }
+
+                $('.element').removeClass('hidden');
+            }
+
+            getWidgetData();
+            initSocket();
+        });
+    </script>
+
+    <div class="element" style="display: none;">
+        <div class="text-header textSize top changeFont"></div>
+        <div class="widget">
+            <div class="multi-goal"></div>
+            <div class="received">
+                <div class="got textSize">0</div>
+                <img class="imageDivider" style="display: none;" />
+                <div class="left textSize">0</div>
+            </div>
+            <div class="text">
+                <div class="start textSize changeFont changeFontNumbers">0</div>
+                <div class="text-header middle textSize changeFont"></div>
+                <div class="end textSize changeFont changeFontNumbers">0</div>
+            </div>
+        </div>
+        <div class="text-header textSize bottom changeFont"></div>
+    </div>
+
+    <div class="widget-rotated" style="display: none;">
+        <div class="received-rotated">
+            <div class="two left textSize"></div>
+            <img class="imageDivider" style="display: none;" />
+            <div class="one got textSize"></div>
+        </div>
+        <div class="text-rotated">
+            <div class="end textSize changeFont changeFontNumbers">0</div>
+            <div class="text-header middle textSize changeFont"></div>
+            <div class="start textSize changeFont changeFontNumbers">0</div>
+        </div>
+    </div>
 </body>
+
 </html>
